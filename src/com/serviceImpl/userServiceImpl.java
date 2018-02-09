@@ -8,8 +8,8 @@ import com.service.userService;
 public class userServiceImpl implements userService{
 	private userDao dao= new userDaoImpl();
 	@Override
-	public User login(Integer uid) {
-		return dao.login(uid);
+	public Boolean login(String loginName, String loginPwd) {
+		return dao.login(loginName, loginPwd);
 	}
 
 	@Override

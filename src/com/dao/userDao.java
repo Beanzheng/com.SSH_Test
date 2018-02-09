@@ -11,7 +11,7 @@ public interface userDao {
 	 * @param user
 	 * @return 
 	 */
-	public User login(Integer uid);
+	public Boolean login(String loginName,String loginPwd);
 	/**
 	 * 处理注册服务
 	 * @param user

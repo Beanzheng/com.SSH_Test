@@ -7,20 +7,19 @@ import com.dao.userDao;
 import com.hibrenate.Factory.HibernateSessionFactory;
 
 public class userDaoImpl implements userDao{
+	@SuppressWarnings("unchecked")
 	@Override
-	public User login(Integer uid) {
+	public Boolean login(String loginName,String loginPwd) {
+		boolean flag=false;
 		Session session= HibernateSessionFactory.getSession();
-		Transaction ts =null;
-		User user=null;
-		try{
-			ts= session.beginTransaction();
-			user= (User) session.get(User.class,uid);
-		}catch (Exception e) {
-			if(ts !=null)ts.rollback();
-			System.out.println("System error!保持持久化对象时出错，原因是：");
-			e.printStackTrace();
+		String sql="select * from user where userName=? and pwd=?";
+		List<User> list;
+		list= session.createQuery(sql).setString(0,loginName).setString(1, loginPwd).list();
+		if(list.size() != 0){
+			flag=true;
 		}
-		return user;
+		return flag;
+		
 	}
 
 	@Override

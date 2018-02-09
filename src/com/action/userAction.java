@@ -18,16 +18,17 @@ public class userAction extends ActionSupport implements ModelDriven<User>{
 	}
 	
 	public String login() throws Exception{
-		User user= service.login(model.getUid());
-		if(user != null){
-			try {
-				BeanUtils.copyProperties(model, user);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		Boolean user= service.login(getModel().getLoginName(),getModel().getLoginPwd());
+		boolean temp=true;
+		if(user){
 			
+			return SUCCESS;
+		}else {
+			temp=false;
+			return ERROR;
 		}
-		return INPUT;
+		
+		
 		
 	}
 	public String reigster(String loginName,String loginPwd,String sex) throws Exception{
