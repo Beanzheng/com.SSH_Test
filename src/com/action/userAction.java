@@ -14,10 +14,21 @@ public class userAction extends ActionSupport implements ModelDriven<User>{
 		return model;
 	}
 	
-	public String login() throws Exception{
+	public String login(String loginName,String loginPwd) throws Exception{
+		if(getModel().getLoginName().equalsIgnoreCase(loginName)
+				 && getModel().getLoginPwd().equalsIgnoreCase(loginPwd)){
+			return SUCCESS;
+		}else {
+			return ERROR;
+		}
+		
+	}
+	public String reigster(String loginName,String loginPwd,String sex) throws Exception{
 		
 		return null;
-		
+	}
+	public String loginout(){
+		return null;
 	}
 	public void setService(userService service){
 		this.service= service;
