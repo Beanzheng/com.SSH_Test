@@ -1,14 +1,15 @@
 package com.serviceImpl;
 
+import com.bean.User;
 import com.dao.userDao;
+import com.daoImpl.userDaoImpl;
 import com.service.userService;
 
 public class userServiceImpl implements userService{
-	userDao dao;
+	private userDao dao= new userDaoImpl();
 	@Override
-	public void login(String loginName, String loginPwd) {
-		// TODO Auto-generated method stub
-		
+	public User login(Integer uid) {
+		return dao.login(uid);
 	}
 
 	@Override
@@ -21,8 +22,5 @@ public class userServiceImpl implements userService{
 	public void loginout() {
 		// TODO Auto-generated method stub
 		
-	}
-	public void setDao(userDao dao){
-		this.dao= dao;
 	}
 }

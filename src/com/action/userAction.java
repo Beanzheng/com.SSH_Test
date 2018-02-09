@@ -1,12 +1,15 @@
 package com.action;
 
+import org.springframework.beans.BeanUtils;
+
 import com.bean.User;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.service.userService;
+import com.serviceImpl.userServiceImpl;
 
 public class userAction extends ActionSupport implements ModelDriven<User>{
-	userService service;
+	userService service= new userServiceImpl();
 	private User model = new User();
 	@Override
 	public User getModel() {
@@ -14,13 +17,17 @@ public class userAction extends ActionSupport implements ModelDriven<User>{
 		return model;
 	}
 	
-	public String login(String loginName,String loginPwd) throws Exception{
-		if(getModel().getLoginName().equalsIgnoreCase(loginName)
-				 && getModel().getLoginPwd().equalsIgnoreCase(loginPwd)){
-			return SUCCESS;
-		}else {
-			return ERROR;
+	public String login() throws Exception{
+		User user= service.login(model.getUid());
+		if(user != null){
+			try {
+				BeanUtils.copyProperties(model, user);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
+		return INPUT;
 		
 	}
 	public String reigster(String loginName,String loginPwd,String sex) throws Exception{

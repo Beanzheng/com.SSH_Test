@@ -9,8 +9,9 @@ public interface userDao {
 	/**
 	 * 处理登陆服务
 	 * @param user
+	 * @return 
 	 */
-	public void login(User user);
+	public User login(Integer uid);
 	/**
 	 * 处理注册服务
 	 * @param user
